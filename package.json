@@ -1,0 +1,32 @@
+{
+  "name": "@heymarco/card",
+  "version": "1.0.0",
+  "description": "a flexible and extensible content container with optional header & footer.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heyymarco/card.git"
+  },
+  "keywords": [
+    "card",
+    "content",
+    "container",
+    "header",
+    "footer",
+    "group"
+  ],
+  "author": "HeyMarco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heyymarco/card/issues"
+  },
+  "homepage": "https://github.com/heyymarco/card#readme",
+  "dependencies": {
+    "@heymarco/colors": "^1.0.1",
+    "@heymarco/container": "^1.0.5",
+    "@heymarco/media-breakpoints": "^1.0.2"
+  }
+}
