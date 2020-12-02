@@ -2,7 +2,6 @@
   "name": "@heymarco/card",
   "version": "1.0.0",
   "description": "a flexible and extensible content container with optional header & footer.",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +11,8 @@
   },
   "keywords": [
     "card",
+    "css3",
+    "css variable",
     "content",
     "container",
     "header",

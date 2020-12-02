@@ -1,0 +1,75 @@
+@use "../../../node_modules/@heymarco/colors/index" as *;
+@use "../../../node_modules/@heymarco/container/index" as *;
+@use "../../../node_modules/@heymarco/media-breakpoints/index" as *;
+
+
+
+$class-root         : ":root"                                                                   !default;
+$var-prefix         : "card"                                                                    !default;
+$width              : unset                                                                     !default;
+$height             : unset                                                                     !default;
+$padding-x          : var(--container-x, var(--#{$var-prefix}-spacer-x))                        !default;
+$padding-y          : calc(var(--container-y, calc(var(--#{$var-prefix}-spacer-y) * 2)) / 2)    !default;
+$enable-responsive  : true                                                                      !default;
+$padding-y-phone    : var(--container-y, var(--#{$var-prefix}-spacer-y))                        !default;
+$spacer-x           : .75rem                                                                    !default;
+$spacer-y           : 1.25rem                                                                   !default;
+
+
+$color              : unset                                                                     !default;
+$background         : var(--white) border-box                                                   !default;
+
+$header-color       : unset                                                                     !default;
+$header-background  : color-fade($black, 0.25, 0.05) padding-box                                !default;
+
+$footer-color       : unset                                                                     !default;
+$footer-background  : color-fade($black, 0.05, 0.25) padding-box                                !default;
+
+$body-color         : unset                                                                     !default;
+$body-background    : unset                                                                     !default;
+
+
+$border-width       : var(--border-width, 1px)                                                  !default;
+$border-style       : solid                                                                     !default;
+$border-color       : rgba(0, 0, 0, 0.125)                                                    !default;
+$border-radius      : var(--border-radius, 4px)                                                 !default;
+
+
+
+@mixin card-vars {
+    --#{$var-prefix}-width: #{$width};
+    --#{$var-prefix}-height: #{$height};
+    --#{$var-prefix}-padding-x: #{$padding-x};
+    --#{$var-prefix}-padding-y: #{$padding-y};
+    @if ($enable-responsive) {
+        --#{$var-prefix}-padding-phone: #{$padding-y-phone};
+        @include media-phone-down {
+            --#{$var-prefix}-padding-y: var(--#{$var-prefix}-padding-phone);
+        }
+    }
+    --#{$var-prefix}-spacer-x: #{$spacer-x};
+    --#{$var-prefix}-spacer-y: #{$spacer-y};
+
+
+    --#{$var-prefix}-color: #{$color};
+    --#{$var-prefix}-background: #{$background};
+
+    --#{$var-prefix}-header-color: #{$header-color};
+    --#{$var-prefix}-header-background: #{$header-background};
+
+    --#{$var-prefix}-footer-color: #{$footer-color};
+    --#{$var-prefix}-footer-background: #{$footer-background};
+
+    --#{$var-prefix}-body-color: #{$body-color};
+    --#{$var-prefix}-body-background: #{$body-background};
+
+
+    --#{$var-prefix}-border-width: #{$border-width};
+    --#{$var-prefix}-border-style: #{$border-style};
+    --#{$var-prefix}-border-color: #{$border-color};
+    --#{$var-prefix}-border: var(--#{$var-prefix}-border-width) var(--#{$var-prefix}-border-style) var(--#{$var-prefix}-border-color);
+    --#{$var-prefix}-border-radius: #{$border-radius};
+}
+@if ($class-root) {
+    #{$class-root} { @include card-vars; }
+}
