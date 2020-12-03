@@ -4,7 +4,7 @@
 
 
 
-$class-root         : ":root"                                                                   !default;
+$var-root           : ":root"                                                                   !default;
 $var-prefix         : "card"                                                                    !default;
 $width              : unset                                                                     !default;
 $height             : unset                                                                     !default;
@@ -70,6 +70,6 @@ $border-radius      : var(--border-radius, 4px)                                 
     --#{$var-prefix}-border: var(--#{$var-prefix}-border-width) var(--#{$var-prefix}-border-style) var(--#{$var-prefix}-border-color);
     --#{$var-prefix}-border-radius: #{$border-radius};
 }
-@if ($class-root) {
-    #{$class-root} { @include card-vars; }
+@if ($var-root) {
+    #{$var-root} { @include card-vars; }
 }

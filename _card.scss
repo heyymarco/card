@@ -1,4 +1,4 @@
-$class-name                     : ".card"   !default;
+$class                          : ".card"   !default;
 $var-prefix                     : "card"    !default;
 $enable-clip-radius             : true      !default;
 $enable-hr-formatting           : true      !default;
@@ -104,6 +104,6 @@ $enable-link-formatting         : true      !default;
         background: var(--#{$var-prefix}-body-background);
     }
 }
-@if ($class-name) {
-    #{$class-name} { @include card; }
+@if ($class) {
+    #{$class} { @include card; }
 }
