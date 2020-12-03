@@ -1,6 +1,6 @@
 {
   "name": "@heymarco/card",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a flexible and extensible content container with optional header & footer.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,7 +27,7 @@
   "homepage": "https://github.com/heyymarco/card#readme",
   "dependencies": {
     "@heymarco/colors": "^1.0.1",
-    "@heymarco/container": "^1.0.5",
+    "@heymarco/container": "^1.0.6",
     "@heymarco/media-breakpoints": "^1.0.2"
   }
 }
