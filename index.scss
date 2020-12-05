@@ -1,2 +1,198 @@
-@import "card-vars";
-@import "card";
+// development:
+// @use "node_modules/@heymarco/colors/index" as color;
+// @use "node_modules/@heymarco/typography/index" as typo;
+// @use "node_modules/@heymarco/container/index" as container;
+// @use "node_modules/@heymarco/spacer/index" as spacer;
+// @use "node_modules/@heymarco/media-breakpoints/index" as *;
+
+// production:
+@use "../../../node_modules/@heymarco/colors/index" as color;
+@use "../../../node_modules/@heymarco/typography/index" as typo;
+@use "../../../node_modules/@heymarco/container/index" as container;
+@use "../../../node_modules/@heymarco/spacer/index" as spacer;
+@use "../../../node_modules/@heymarco/media-breakpoints/index" as *;
+
+
+
+$class              : ".card"                                                                   !default;
+$var-root           : ":root"                                                                   !default;
+$var-prefix         : "card"                                                                    !default;
+$cssvar: "";
+@if (($var-prefix == null) or ($var-prefix == "")) {
+    $cssvar: "--";
+} @else {
+    $cssvar: "--#{$var-prefix}-";
+}
+
+$width              : unset                                                                     !default;
+$height             : unset                                                                     !default;
+
+$padding-x          : var(#{container.$cssvar}x, var(#{$cssvar}spacer-x))                       !default;
+$padding-y          : calc(var(#{container.$cssvar}y, calc(var(#{$cssvar}spacer-y) * 2)) / 2)   !default;
+$enable-responsive  : true                                                                      !default;
+$padding-y-phone    : var(#{container.$cssvar}y, var(#{$cssvar}spacer-y))                       !default;
+$spacer-x           : var(#{spacer.$cssvar}normal)                                              !default;
+$spacer-y           : var(#{spacer.$cssvar}normal)                                              !default;
+
+$border-width       : var(--border-width, 1px)                                                  !default;
+$border-style       : solid                                                                     !default;
+$border-color       : change-color(color.$black, $alpha: 0.125)                                 !default;
+$border-radius      : var(--border-radius, 4px)                                                 !default;
+
+$color              : unset                                                                     !default;
+$background         : var(#{typo.$cssvar}background) border-box                                 !default;
+
+$header-color       : unset                                                                     !default;
+$header-background  : color.color-fade(color.$black, 0.25, 0.05) padding-box                    !default;
+
+$footer-color       : unset                                                                     !default;
+$footer-background  : color.color-fade(color.$black, 0.05, 0.25) padding-box                    !default;
+
+$body-color         : unset                                                                     !default;
+$body-background    : unset                                                                     !default;
+
+$enable-clip-radius             : true                                                          !default;
+$enable-hr-formatting           : true                                                          !default;
+$enable-paragraph-formatting    : true                                                          !default;
+$enable-link-formatting         : true                                                          !default;
+
+
+
+@mixin cssvar {
+    #{$cssvar}width: #{$width};
+    #{$cssvar}height: #{$height};
+    #{$cssvar}padding-x: #{$padding-x};
+    #{$cssvar}padding-y: #{$padding-y};
+    @if ($enable-responsive) {
+        #{$cssvar}padding-y-phone: #{$padding-y-phone};
+        @include media-phone-down {
+            #{$cssvar}padding-y: var(#{$cssvar}padding-y-phone);
+        }
+    }
+    #{$cssvar}spacer-x: #{$spacer-x};
+    #{$cssvar}spacer-y: #{$spacer-y};
+
+    #{$cssvar}border-width: #{$border-width};
+    #{$cssvar}border-style: #{$border-style};
+    #{$cssvar}border-color: #{$border-color};
+    #{$cssvar}border: var(#{$cssvar}border-width) var(#{$cssvar}border-style) var(#{$cssvar}border-color);
+    #{$cssvar}border-radius: #{$border-radius};
+
+    #{$cssvar}color: #{$color};
+    #{$cssvar}background: #{$background};
+
+    #{$cssvar}header-color: #{$header-color};
+    #{$cssvar}header-background: #{$header-background};
+
+    #{$cssvar}footer-color: #{$footer-color};
+    #{$cssvar}footer-background: #{$footer-background};
+
+    #{$cssvar}body-color: #{$body-color};
+    #{$cssvar}body-background: #{$body-background};
+}
+@if ($var-root) {
+    #{$var-root} { @include cssvar; }
+}
+
+
+
+/// a flexible and extensible content container with optional header & footer.
+@mixin card {
+    // position & size
+    position: relative;
+    min-width: 0; // See https://github.com/twbs/bootstrap/pull/22740#issuecomment-305868106
+    width: var(#{$cssvar}width);
+    height: var(#{$cssvar}height);
+
+    // appearance:
+    border: var(#{$cssvar}border);
+    border-radius: var(#{$cssvar}border-radius);
+    @if ($enable-clip-radius == true) {
+        overflow: hidden;
+    }
+    
+    // text formatting:
+    color: var(#{$cssvar}color);
+    background: var(#{$cssvar}background);
+    word-wrap: break-word;
+
+    // flex configs:
+    display: flex;
+    flex-direction: column;
+
+
+
+    @if ($enable-hr-formatting) {
+        > hr {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+
+
+    // general card's sub items:
+    > { header, .header, h1, h2, h3, h4, h5, h6, .body, footer, .footer, aside, .aside {
+        /* begin: paddings */
+        padding-left: var(#{$cssvar}padding-x);
+        padding-right: var(#{$cssvar}padding-x);
+
+        padding-top: var(#{$cssvar}padding-y);
+        padding-bottom: var(#{$cssvar}padding-y);
+        /* end: paddings */
+
+
+        @if ($enable-paragraph-formatting == true) {
+            p:last-child {
+                margin-bottom: 0; // kill last paragraph's spacing
+            }
+        }
+
+
+        @if ($enable-link-formatting == true) {
+            .link {
+                + .link {
+                    margin-left: var(#{$cssvar}spacer-x);
+                }
+            }
+        }
+    }}
+
+
+
+    // card's header
+    > { header, .header {
+        color: var(#{$cssvar}header-color);
+        background: var(#{$cssvar}header-background);
+
+        border-bottom: var(#{$cssvar}border);
+    }}
+
+    // card's footer
+    > { footer, .footer {
+        color: var(#{$cssvar}footer-color);
+        background: var(#{$cssvar}footer-background);
+
+        border-top: var(#{$cssvar}border);
+    }}
+
+
+    // we use .body instead of body because html5 doen't allow &lt;body&gt; inside &lt;article&gt;.
+    > .body {
+        // Enable `flex-grow: 1` for decks and groups so that card blocks take up
+        // as much space as possible, ensuring footers are aligned to the bottom.
+        flex: 1 1 auto;
+
+        // Workaround for the image size bug in IE
+        // See: https://github.com/twbs/bootstrap/pull/28855
+        min-height: 1px;
+
+
+
+        color: var(#{$cssvar}body-color);
+        background: var(#{$cssvar}body-background);
+    }
+}
+@if ($class) {
+    #{$class} { @include card; }
+}
