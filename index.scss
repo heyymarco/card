@@ -1,13 +1,15 @@
 // development:
-// @use "node_modules/@heymarco/colors/index" as color;
+// @use "node_modules/@heymarco/colors/index" as col;
 // @use "node_modules/@heymarco/typography/index" as typo;
+// @use "node_modules/@heymarco/border/index" as bd;
 // @use "node_modules/@heymarco/container/index" as container;
 // @use "node_modules/@heymarco/spacer/index" as spacer;
 // @use "node_modules/@heymarco/media-breakpoints/index" as *;
 
 // production:
-@use "../../../node_modules/@heymarco/colors/index" as color;
+@use "../../../node_modules/@heymarco/colors/index" as col;
 @use "../../../node_modules/@heymarco/typography/index" as typo;
+@use "../../../node_modules/@heymarco/border/index" as bd;
 @use "../../../node_modules/@heymarco/container/index" as container;
 @use "../../../node_modules/@heymarco/spacer/index" as spacer;
 @use "../../../node_modules/@heymarco/media-breakpoints/index" as *;
@@ -34,19 +36,19 @@ $padding-y-phone    : var(#{container.$cssvar}y, var(#{$cssvar}spacer-y))       
 $spacer-x           : var(#{spacer.$cssvar}normal)                                              !default;
 $spacer-y           : var(#{spacer.$cssvar}normal)                                              !default;
 
-$border-width       : var(--border-width, 1px)                                                  !default;
-$border-style       : solid                                                                     !default;
-$border-color       : change-color(color.$black, $alpha: 0.125)                                 !default;
-$border-radius      : var(--border-radius, 4px)                                                 !default;
+$border-width       : var(#{bd.$cssvar}hairline)                                                !default;
+$border-style       : var(#{bd.$cssvar}style)                                                   !default;
+$border-color       : var(#{bd.$cssvar}color)                                                   !default;
+$border-radius      : var(#{bd.$cssvar}radius-default)                                          !default;
 
 $color              : unset                                                                     !default;
 $background         : var(#{typo.$cssvar}background) border-box                                 !default;
 
 $header-color       : unset                                                                     !default;
-$header-background  : color.color-fade(color.$black, 0.25, 0.05) padding-box                    !default;
+$header-background  : col.color-fade(col.$black, 0.25, 0.05) padding-box                        !default;
 
 $footer-color       : unset                                                                     !default;
-$footer-background  : color.color-fade(color.$black, 0.05, 0.25) padding-box                    !default;
+$footer-background  : col.color-fade(col.$black, 0.05, 0.25) padding-box                        !default;
 
 $body-color         : unset                                                                     !default;
 $body-background    : unset                                                                     !default;
